@@ -1,10 +1,11 @@
 <template>
   <section class="lesson-list">
-    <div class="lesson-list-header">
-      <div>
-        <h2>Available Lessons</h2>
-        <p>Choose from a range of after school subjects.</p>
-      </div>
+  <div class="lesson-list-header">
+  <div>
+    <h2>Available Lessons</h2>
+    <p>Choose from a range of after school subjects and activities.</p>
+  </div>
+</div>
       <!-- later we’ll add sorting controls here -->
     </div>
 
@@ -238,25 +239,27 @@ export default {
 
 <style scoped>
 .lesson-list {
-  background: white;
-  border-radius: 18px;
-  padding: 20px 22px 24px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 22px 22px 26px;
   box-shadow:
-    0 18px 40px rgba(15, 23, 42, 0.12),
-    0 0 0 1px rgba(148, 163, 184, 0.12);
+    0 20px 45px rgba(15, 23, 42, 0.16),
+    0 0 0 1px rgba(148, 163, 184, 0.18);
 }
 
+/* header */
 .lesson-list-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .lesson-list-header h2 {
   margin: 0;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 23px;
+  font-weight: 650;
+  color: #0f172a;
 }
 
 .lesson-list-header p {
@@ -265,7 +268,7 @@ export default {
   color: #6b7280;
 }
 
-/* Horizontal layout – cards */
+/* horizontal card layout */
 .lessons-grid {
   display: flex;
   flex-direction: column;
@@ -275,24 +278,27 @@ export default {
 .lesson-card {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 14px 16px;
-  border-radius: 14px;
+  gap: 18px;
+  padding: 16px 18px;
+  border-radius: 16px;
   background: #f9fafb;
   border: 1px solid #e5e7eb;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .lesson-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(148, 163, 184, 0.4);
+  box-shadow: 0 10px 26px rgba(148, 163, 184, 0.55);
   background: #ffffff;
+  border-color: #bfdbfe;
 }
 
+/* left icon block */
 .lesson-icon-wrap {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
   background: radial-gradient(circle at 20% 20%, #3b82f6, #10b981);
   display: flex;
   align-items: center;
@@ -305,6 +311,7 @@ export default {
   font-size: 24px;
 }
 
+/* middle content */
 .lesson-main {
   flex: 1;
   min-width: 0;
@@ -312,7 +319,7 @@ export default {
 
 .lesson-title {
   margin: 0;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 650;
   color: #111827;
 }
@@ -320,17 +327,18 @@ export default {
 .lesson-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 6px;
+  gap: 8px;
+  margin-top: 7px;
 }
 
 .tag {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 8px;
+  padding: 4px 10px;
   border-radius: 999px;
   font-size: 13px;
+  font-weight: 500;
   border: 1px solid transparent;
 }
 
@@ -351,23 +359,25 @@ export default {
 }
 
 .lesson-description {
-  margin: 6px 0 0;
+  margin: 7px 0 0;
   font-size: 13px;
-  color: #6b7280;
+  line-height: 1.45;
+  color: #4b5563;
 }
 
-/* Right side: spaces and button */
+/* right side: spaces + button */
 .lesson-side {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 8px;
-  min-width: 150px;
+  min-width: 160px;
 }
 
 .spaces-pill {
   font-size: 13px;
-  padding: 4px 10px;
+  font-weight: 500;
+  padding: 5px 12px;
   border-radius: 999px;
   background: #ecfdf3;
   color: #166534;
@@ -382,7 +392,7 @@ export default {
 }
 
 .add-btn {
-  padding: 8px 14px;
+  padding: 9px 16px;
   border-radius: 999px;
   border: none;
   background: linear-gradient(135deg, #3b82f6, #10b981);
@@ -390,18 +400,21 @@ export default {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.15s ease, transform 0.1s ease;
+  transition: opacity 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+  box-shadow: 0 8px 18px rgba(56, 189, 248, 0.45);
 }
 
 .add-btn:hover:not(:disabled) {
-  opacity: 0.9;
+  opacity: 0.92;
   transform: translateY(-1px);
+  box-shadow: 0 12px 25px rgba(56, 189, 248, 0.6);
 }
 
 .add-btn:disabled {
   background: #e5e7eb;
   color: #9ca3af;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 @media (max-width: 768px) {
