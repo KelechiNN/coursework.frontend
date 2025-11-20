@@ -4,17 +4,19 @@
     <ul>
       <li v-for="lesson in lessons" :key="lesson.id" class="lesson-card">
         <h3>
-  <i :class="lesson.icon" class="lesson-icon"></i>
-  {{ lesson.subject }}
-</h3>
+          <i :class="lesson.icon" class="lesson-icon"></i>
+          {{ lesson.subject }}
+        </h3>
+
         <p><strong>Location:</strong> {{ lesson.location }}</p>
         <p><strong>Price:</strong> £{{ lesson.price }}</p>
-        <p><strong>Spaces:</strong> {{ lesson.spaces }}</p>
+        <p><strong>Spaces Available:</strong> {{ lesson.spacesAvailable }}</p>
+
         <button
-          :disabled="lesson.spaces === 0"
+          :disabled="lesson.spacesAvailable === 0"
           @click="addToCart(lesson)"
         >
-          Add to Cart
+          {{ lesson.spacesAvailable === 0 ? 'Full' : 'Add to Cart' }}
         </button>
       </li>
     </ul>
@@ -27,30 +29,29 @@ export default {
   data() {
     return {
       lessons: [
-        { id: 1, subject: 'Math', location: 'London', price: 20, spaces: 5, icon: 'fa-solid fa-calculator' },
-        { id: 2, subject: 'Science', location: 'Birmingham', price: 25, spaces: 6, icon: 'fa-solid fa-flask' },
-        { id: 3, subject: 'English', location: 'Manchester', price: 18, spaces: 8, icon: 'fa-solid fa-book' },
-        { id: 4, subject: 'Art', location: 'Liverpool', price: 15, spaces: 7, icon: 'fa-solid fa-paintbrush' },
-        { id: 5, subject: 'Music', location: 'Leeds', price: 22, spaces: 5, icon: 'fa-solid fa-music' },
-        { id: 6, subject: 'History', location: 'Sheffield', price: 19, spaces: 9, icon: 'fa-solid fa-landmark' },
-        { id: 7, subject: 'Geography', location: 'Nottingham', price: 17, spaces: 6, icon: 'fa-solid fa-globe' },
-        { id: 8, subject: 'Coding', location: 'Bristol', price: 30, spaces: 10, icon: 'fa-solid fa-laptop-code' },
-        { id: 9, subject: 'Drama', location: 'Cardiff', price: 16, spaces: 5, icon: 'fa-solid fa-masks-theater' },
-        { id: 10, subject: 'Sports', location: 'Newcastle', price: 12, spaces: 7, icon: 'fa-solid fa-football' }
+        { id: 1, subject: 'Math',      location: 'London',     price: 20, spacesAvailable: 5,  icon: 'fa-solid fa-calculator' },
+        { id: 2, subject: 'Science',   location: 'Birmingham', price: 25, spacesAvailable: 6,  icon: 'fa-solid fa-flask' },
+        { id: 3, subject: 'English',   location: 'Manchester', price: 18, spacesAvailable: 8,  icon: 'fa-solid fa-book' },
+        { id: 4, subject: 'Art',       location: 'Liverpool',  price: 15, spacesAvailable: 7,  icon: 'fa-solid fa-paintbrush' },
+        { id: 5, subject: 'Music',     location: 'Leeds',      price: 22, spacesAvailable: 5,  icon: 'fa-solid fa-music' },
+        { id: 6, subject: 'History',   location: 'Sheffield',  price: 19, spacesAvailable: 9,  icon: 'fa-solid fa-landmark' },
+        { id: 7, subject: 'Geography', location: 'Nottingham', price: 17, spacesAvailable: 6,  icon: 'fa-solid fa-globe' },
+        { id: 8, subject: 'Coding',    location: 'Bristol',    price: 30, spacesAvailable: 10, icon: 'fa-solid fa-laptop-code' },
+        { id: 9, subject: 'Drama',     location: 'Cardiff',    price: 16, spacesAvailable: 5,  icon: 'fa-solid fa-masks-theater' },
+        { id: 10, subject: 'Sports',   location: 'Newcastle',  price: 12, spacesAvailable: 7,  icon: 'fa-solid fa-football' }
       ]
     };
   },
   methods: {
     addToCart(lesson) {
-      if (lesson.spaces > 0) {
-        lesson.spaces--;
+      if (lesson.spacesAvailable > 0) {
+        lesson.spacesAvailable--;
         alert(`${lesson.subject} added to cart!`);
       }
     }
   }
 };
 </script>
-
 
 <style scoped>
 .lesson-list {
@@ -85,9 +86,9 @@ button:disabled {
   background-color: gray;
   cursor: not-allowed;
 }
+
 .lesson-icon {
   color: #42b983;
   margin-right: 10px;
 }
-
 </style>
