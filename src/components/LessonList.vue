@@ -31,9 +31,9 @@
               £{{ lesson.price }}
             </span>
           </div>
-          <p class="lesson-description">
-            Great after school {{ lesson.subject.toLowerCase() }} support for students.
-          </p>
+       <p class="lesson-description">
+  {{ lesson.description }}
+</p>
         </div>
 
         <!-- Right: Spaces + Button -->
@@ -67,25 +67,161 @@ export default {
   data() {
     return {
   lessons: [
-  { id: 1, subject: 'Math',          location: 'London',        price: 20, spacesAvailable: 5,  icon: 'fa-solid fa-calculator' },
-  { id: 2, subject: 'Science',       location: 'Birmingham',    price: 25, spacesAvailable: 6,  icon: 'fa-solid fa-flask' },
-  { id: 3, subject: 'English',       location: 'Manchester',    price: 18, spacesAvailable: 8,  icon: 'fa-solid fa-book' },
-  { id: 4, subject: 'Art',           location: 'Liverpool',     price: 15, spacesAvailable: 7,  icon: 'fa-solid fa-paintbrush' },
-  { id: 5, subject: 'Music',         location: 'Leeds',         price: 22, spacesAvailable: 5,  icon: 'fa-solid fa-music' },
-  { id: 6, subject: 'History',       location: 'Sheffield',     price: 19, spacesAvailable: 9,  icon: 'fa-solid fa-landmark' },
-  { id: 7, subject: 'Geography',     location: 'Nottingham',    price: 17, spacesAvailable: 6,  icon: 'fa-solid fa-globe' },
-  { id: 8, subject: 'Coding',        location: 'Bristol',       price: 30, spacesAvailable: 10, icon: 'fa-solid fa-laptop-code' },
-  { id: 9, subject: 'Drama',         location: 'Cardiff',       price: 16, spacesAvailable: 5,  icon: 'fa-solid fa-masks-theater' },
-  { id: 10, subject: 'Sports',       location: 'Newcastle',     price: 12, spacesAvailable: 7,  icon: 'fa-solid fa-football' },
+  {
+    id: 1,
+    subject: 'Math',
+    location: 'London',
+    price: 20,
+    spacesAvailable: 5,
+    icon: 'fa-solid fa-calculator',
+    description: 'Improve your algebra, fractions, equations and problem-solving skills.'
+  },
+  {
+    id: 2,
+    subject: 'Science',
+    location: 'Birmingham',
+    price: 25,
+    spacesAvailable: 6,
+    icon: 'fa-solid fa-flask',
+    description: 'Explore the periodic table, chemical reactions and exciting scientific concepts.'
+  },
+  {
+    id: 3,
+    subject: 'English',
+    location: 'Manchester',
+    price: 18,
+    spacesAvailable: 8,
+    icon: 'fa-solid fa-book',
+    description: 'Boost reading skills, essay writing and understand classic literature.'
+  },
+  {
+    id: 4,
+    subject: 'Art',
+    location: 'Liverpool',
+    price: 15,
+    spacesAvailable: 7,
+    icon: 'fa-solid fa-paintbrush',
+    description: 'Learn sketching, colouring, shading and creative expression techniques.'
+  },
+  {
+    id: 5,
+    subject: 'Music',
+    location: 'Leeds',
+    price: 22,
+    spacesAvailable: 5,
+    icon: 'fa-solid fa-music',
+    description: 'Discover rhythm, melody, musical instruments and performance basics.'
+  },
+  {
+    id: 6,
+    subject: 'History',
+    location: 'Sheffield',
+    price: 19,
+    spacesAvailable: 9,
+    icon: 'fa-solid fa-landmark',
+    description: 'Learn about ancient civilizations, major events and influential leaders.'
+  },
+  {
+    id: 7,
+    subject: 'Geography',
+    location: 'Nottingham',
+    price: 17,
+    spacesAvailable: 6,
+    icon: 'fa-solid fa-globe',
+    description: 'Study maps, climates, natural disasters and world environments.'
+  },
+  {
+    id: 8,
+    subject: 'Coding',
+    location: 'Bristol',
+    price: 30,
+    spacesAvailable: 10,
+    icon: 'fa-solid fa-laptop-code',
+    description: 'Learn the basics of programming, logic, and building simple apps.'
+  },
+  {
+    id: 9,
+    subject: 'Drama',
+    location: 'Cardiff',
+    price: 16,
+    spacesAvailable: 5,
+    icon: 'fa-solid fa-masks-theater',
+    description: 'Build confidence through acting, improvisation and creative performance.'
+  },
+  {
+    id: 10,
+    subject: 'Sports',
+    location: 'Newcastle',
+    price: 12,
+    spacesAvailable: 7,
+    icon: 'fa-solid fa-football',
+    description: 'Improve physical fitness, teamwork and a variety of sport activities.'
+  },
 
-  // NEW LESSONS
-  { id: 11, subject: 'Physics',        location: 'Oxford',        price: 28, spacesAvailable: 6, icon: 'fa-solid fa-atom' },
-  { id: 12, subject: 'Biology',        location: 'Cambridge',     price: 26, spacesAvailable: 8, icon: 'fa-solid fa-dna' },
-  { id: 13, subject: 'French',         location: 'Brighton',      price: 18, spacesAvailable: 7, icon: 'fa-solid fa-language' },
-  { id: 14, subject: 'Dance',          location: 'Southampton',   price: 14, spacesAvailable: 5, icon: 'fa-solid fa-person-running' },
-  { id: 15, subject: 'Business',       location: 'York',          price: 24, spacesAvailable: 6, icon: 'fa-solid fa-briefcase' },
-  { id: 16, subject: 'Computing',      location: 'Derby',         price: 27, spacesAvailable: 9, icon: 'fa-solid fa-microchip' },
-  { id: 17, subject: 'Robotics',       location: 'Coventry',      price: 35, spacesAvailable: 4, icon: 'fa-solid fa-robot' }
+  // New lessons
+  {
+    id: 11,
+    subject: 'Physics',
+    location: 'Oxford',
+    price: 28,
+    spacesAvailable: 6,
+    icon: 'fa-solid fa-atom',
+    description: 'Understand motion, forces, electricity and real-world physics concepts.'
+  },
+  {
+    id: 12,
+    subject: 'Biology',
+    location: 'Cambridge',
+    price: 26,
+    spacesAvailable: 8,
+    icon: 'fa-solid fa-dna',
+    description: 'Learn about cells, organisms, ecosystems and human biology.'
+  },
+  {
+    id: 13,
+    subject: 'French',
+    location: 'Brighton',
+    price: 18,
+    spacesAvailable: 7,
+    icon: 'fa-solid fa-language',
+    description: 'Build vocabulary, pronunciation and conversational French skills.'
+  },
+  {
+    id: 14,
+    subject: 'Dance',
+    location: 'Southampton',
+    price: 14,
+    spacesAvailable: 5,
+    icon: 'fa-solid fa-person-running',
+    description: 'Learn choreography, rhythm and performance technique in fun sessions.'
+  },
+  {
+    id: 15,
+    subject: 'Business',
+    location: 'York',
+    price: 24,
+    spacesAvailable: 6,
+    icon: 'fa-solid fa-briefcase',
+    description: 'Understand finance, entrepreneurship and how businesses work.'
+  },
+  {
+    id: 16,
+    subject: 'Computing',
+    location: 'Derby',
+    price: 27,
+    spacesAvailable: 9,
+    icon: 'fa-solid fa-microchip',
+    description: 'Learn about hardware, software, networking and computer systems.'
+  },
+  {
+    id: 17,
+    subject: 'Robotics',
+    location: 'Coventry',
+    price: 35,
+    spacesAvailable: 4,
+    icon: 'fa-solid fa-robot',
+    description: 'Explore robotics, automation and control systems with hands-on projects.'
+  }
 ]
     };
   },
