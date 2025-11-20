@@ -66,18 +66,27 @@ export default {
   name: 'LessonList',
   data() {
     return {
-      lessons: [
-        { id: 1, subject: 'Math',      location: 'London',     price: 20, spacesAvailable: 5,  icon: 'fa-solid fa-calculator' },
-        { id: 2, subject: 'Science',   location: 'Birmingham', price: 25, spacesAvailable: 6,  icon: 'fa-solid fa-flask' },
-        { id: 3, subject: 'English',   location: 'Manchester', price: 18, spacesAvailable: 8,  icon: 'fa-solid fa-book' },
-        { id: 4, subject: 'Art',       location: 'Liverpool',  price: 15, spacesAvailable: 7,  icon: 'fa-solid fa-paintbrush' },
-        { id: 5, subject: 'Music',     location: 'Leeds',      price: 22, spacesAvailable: 5,  icon: 'fa-solid fa-music' },
-        { id: 6, subject: 'History',   location: 'Sheffield',  price: 19, spacesAvailable: 9,  icon: 'fa-solid fa-landmark' },
-        { id: 7, subject: 'Geography', location: 'Nottingham', price: 17, spacesAvailable: 6,  icon: 'fa-solid fa-globe' },
-        { id: 8, subject: 'Coding',    location: 'Bristol',    price: 30, spacesAvailable: 10, icon: 'fa-solid fa-laptop-code' },
-        { id: 9, subject: 'Drama',     location: 'Cardiff',    price: 16, spacesAvailable: 5,  icon: 'fa-solid fa-masks-theater' },
-        { id: 10, subject: 'Sports',   location: 'Newcastle',  price: 12, spacesAvailable: 7,  icon: 'fa-solid fa-football' }
-      ]
+  lessons: [
+  { id: 1, subject: 'Math',          location: 'London',        price: 20, spacesAvailable: 5,  icon: 'fa-solid fa-calculator' },
+  { id: 2, subject: 'Science',       location: 'Birmingham',    price: 25, spacesAvailable: 6,  icon: 'fa-solid fa-flask' },
+  { id: 3, subject: 'English',       location: 'Manchester',    price: 18, spacesAvailable: 8,  icon: 'fa-solid fa-book' },
+  { id: 4, subject: 'Art',           location: 'Liverpool',     price: 15, spacesAvailable: 7,  icon: 'fa-solid fa-paintbrush' },
+  { id: 5, subject: 'Music',         location: 'Leeds',         price: 22, spacesAvailable: 5,  icon: 'fa-solid fa-music' },
+  { id: 6, subject: 'History',       location: 'Sheffield',     price: 19, spacesAvailable: 9,  icon: 'fa-solid fa-landmark' },
+  { id: 7, subject: 'Geography',     location: 'Nottingham',    price: 17, spacesAvailable: 6,  icon: 'fa-solid fa-globe' },
+  { id: 8, subject: 'Coding',        location: 'Bristol',       price: 30, spacesAvailable: 10, icon: 'fa-solid fa-laptop-code' },
+  { id: 9, subject: 'Drama',         location: 'Cardiff',       price: 16, spacesAvailable: 5,  icon: 'fa-solid fa-masks-theater' },
+  { id: 10, subject: 'Sports',       location: 'Newcastle',     price: 12, spacesAvailable: 7,  icon: 'fa-solid fa-football' },
+
+  // NEW LESSONS
+  { id: 11, subject: 'Physics',        location: 'Oxford',        price: 28, spacesAvailable: 6, icon: 'fa-solid fa-atom' },
+  { id: 12, subject: 'Biology',        location: 'Cambridge',     price: 26, spacesAvailable: 8, icon: 'fa-solid fa-dna' },
+  { id: 13, subject: 'French',         location: 'Brighton',      price: 18, spacesAvailable: 7, icon: 'fa-solid fa-language' },
+  { id: 14, subject: 'Dance',          location: 'Southampton',   price: 14, spacesAvailable: 5, icon: 'fa-solid fa-person-running' },
+  { id: 15, subject: 'Business',       location: 'York',          price: 24, spacesAvailable: 6, icon: 'fa-solid fa-briefcase' },
+  { id: 16, subject: 'Computing',      location: 'Derby',         price: 27, spacesAvailable: 9, icon: 'fa-solid fa-microchip' },
+  { id: 17, subject: 'Robotics',       location: 'Coventry',      price: 35, spacesAvailable: 4, icon: 'fa-solid fa-robot' }
+]
     };
   },
   methods: {
@@ -167,8 +176,8 @@ export default {
 
 .lesson-title {
   margin: 0;
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 650;
   color: #111827;
 }
 
@@ -185,7 +194,7 @@ export default {
   gap: 6px;
   padding: 4px 8px;
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 13px;
   border: 1px solid transparent;
 }
 
@@ -221,7 +230,7 @@ export default {
 }
 
 .spaces-pill {
-  font-size: 12px;
+  font-size: 13px;
   padding: 4px 10px;
   border-radius: 999px;
   background: #ecfdf3;
@@ -242,8 +251,8 @@ export default {
   border: none;
   background: linear-gradient(135deg, #3b82f6, #10b981);
   color: white;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
   transition: opacity 0.15s ease, transform 0.1s ease;
 }
