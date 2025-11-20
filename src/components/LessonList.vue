@@ -6,8 +6,9 @@
         <p>Choose from a range of after school subjects and activities.</p>
       </div>
 
-      <!-- SORT CONTROLS (for coursework requirement) -->
+      <!-- SORT + FILTER CONTROLS -->
       <div class="sort-controls">
+        <!-- Sort attribute -->
         <label class="sort-field">
           <span>Sort by</span>
           <select v-model="sortBy">
@@ -18,6 +19,7 @@
           </select>
         </label>
 
+        <!-- Sort direction -->
         <div class="sort-direction">
           <span>Order</span>
           <button
@@ -40,8 +42,33 @@
       </div>
     </div>
 
+    <!-- FILTER ROW -->
+    <div class="filter-row">
+      <label class="sort-field">
+        <span>Area</span>
+        <select v-model="filterArea">
+          <option value="all">All London areas</option>
+          <option value="North London">North London</option>
+          <option value="West London">West London</option>
+          <option value="South London">South London</option>
+          <option value="East London">East London</option>
+          <option value="Central London">Central London</option>
+        </select>
+      </label>
+
+      <label class="sort-field">
+        <span>Price range</span>
+        <select v-model="filterPriceRange">
+          <option value="all">All prices</option>
+          <option value="0-15">£0 - £15</option>
+          <option value="15-20">£15 - £20</option>
+          <option value="20-30">£20 - £30</option>
+        </select>
+      </label>
+    </div>
+
     <div class="lessons-grid">
-      <!-- v-for now uses sortedLessons (not raw lessons) -->
+      <!-- v-for now uses sortedLessons (filtered + sorted) -->
       <article
         v-for="lesson in sortedLessons"
         :key="lesson.id"
@@ -99,14 +126,20 @@ export default {
   name: 'LessonList',
   data() {
     return {
-      // default sort: by subject, ascending
+      // sorting state
       sortBy: 'subject',
       sortDirection: 'asc',
+
+      // filter state
+      filterArea: 'all',
+      filterPriceRange: 'all',
+
+      // lessons, now all in London areas
       lessons: [
         {
           id: 1,
           subject: 'Math',
-          location: 'London',
+          location: 'North London',
           price: 20,
           spacesAvailable: 5,
           icon: 'fa-solid fa-calculator',
@@ -115,7 +148,7 @@ export default {
         {
           id: 2,
           subject: 'Science',
-          location: 'Birmingham',
+          location: 'West London',
           price: 25,
           spacesAvailable: 6,
           icon: 'fa-solid fa-flask',
@@ -124,7 +157,7 @@ export default {
         {
           id: 3,
           subject: 'English',
-          location: 'Manchester',
+          location: 'South London',
           price: 18,
           spacesAvailable: 8,
           icon: 'fa-solid fa-book',
@@ -133,7 +166,7 @@ export default {
         {
           id: 4,
           subject: 'Art',
-          location: 'Liverpool',
+          location: 'East London',
           price: 15,
           spacesAvailable: 7,
           icon: 'fa-solid fa-paintbrush',
@@ -142,7 +175,7 @@ export default {
         {
           id: 5,
           subject: 'Music',
-          location: 'Leeds',
+          location: 'Central London',
           price: 22,
           spacesAvailable: 5,
           icon: 'fa-solid fa-music',
@@ -151,7 +184,7 @@ export default {
         {
           id: 6,
           subject: 'History',
-          location: 'Sheffield',
+          location: 'North London',
           price: 19,
           spacesAvailable: 9,
           icon: 'fa-solid fa-landmark',
@@ -160,7 +193,7 @@ export default {
         {
           id: 7,
           subject: 'Geography',
-          location: 'Nottingham',
+          location: 'East London',
           price: 17,
           spacesAvailable: 6,
           icon: 'fa-solid fa-globe',
@@ -169,7 +202,7 @@ export default {
         {
           id: 8,
           subject: 'Coding',
-          location: 'Bristol',
+          location: 'Central London',
           price: 30,
           spacesAvailable: 10,
           icon: 'fa-solid fa-laptop-code',
@@ -178,7 +211,7 @@ export default {
         {
           id: 9,
           subject: 'Drama',
-          location: 'Cardiff',
+          location: 'West London',
           price: 16,
           spacesAvailable: 5,
           icon: 'fa-solid fa-masks-theater',
@@ -187,7 +220,7 @@ export default {
         {
           id: 10,
           subject: 'Sports',
-          location: 'Newcastle',
+          location: 'South London',
           price: 12,
           spacesAvailable: 7,
           icon: 'fa-solid fa-football',
@@ -196,7 +229,7 @@ export default {
         {
           id: 11,
           subject: 'Physics',
-          location: 'Oxford',
+          location: 'North London',
           price: 28,
           spacesAvailable: 6,
           icon: 'fa-solid fa-atom',
@@ -205,7 +238,7 @@ export default {
         {
           id: 12,
           subject: 'Biology',
-          location: 'Cambridge',
+          location: 'East London',
           price: 26,
           spacesAvailable: 8,
           icon: 'fa-solid fa-dna',
@@ -214,7 +247,7 @@ export default {
         {
           id: 13,
           subject: 'French',
-          location: 'Brighton',
+          location: 'Central London',
           price: 18,
           spacesAvailable: 7,
           icon: 'fa-solid fa-language',
@@ -223,7 +256,7 @@ export default {
         {
           id: 14,
           subject: 'Dance',
-          location: 'Southampton',
+          location: 'South London',
           price: 14,
           spacesAvailable: 5,
           icon: 'fa-solid fa-person-running',
@@ -232,7 +265,7 @@ export default {
         {
           id: 15,
           subject: 'Business',
-          location: 'York',
+          location: 'West London',
           price: 24,
           spacesAvailable: 6,
           icon: 'fa-solid fa-briefcase',
@@ -241,7 +274,7 @@ export default {
         {
           id: 16,
           subject: 'Computing',
-          location: 'Derby',
+          location: 'North London',
           price: 27,
           spacesAvailable: 9,
           icon: 'fa-solid fa-microchip',
@@ -250,8 +283,8 @@ export default {
         {
           id: 17,
           subject: 'Robotics',
-          location: 'Coventry',
-          price: 35,
+          location: 'Central London',
+          price: 30,
           spacesAvailable: 4,
           icon: 'fa-solid fa-robot',
           description: 'Explore robotics, automation and control systems with hands-on projects.'
@@ -260,16 +293,41 @@ export default {
     };
   },
   computed: {
-    // returns lessons sorted based on sortBy + sortDirection
+    // apply filters first (area + price)
+    filteredLessons() {
+      return this.lessons.filter(lesson => {
+        let ok = true;
+
+        // filter by area
+        if (this.filterArea !== 'all') {
+          ok = ok && lesson.location === this.filterArea;
+        }
+
+        // filter by price range
+        if (this.filterPriceRange !== 'all') {
+          const p = lesson.price;
+          if (this.filterPriceRange === '0-15') {
+            ok = ok && p >= 0 && p <= 15;
+          } else if (this.filterPriceRange === '15-20') {
+            ok = ok && p > 15 && p <= 20;
+          } else if (this.filterPriceRange === '20-30') {
+            ok = ok && p > 20 && p <= 30;
+          }
+        }
+
+        return ok;
+      });
+    },
+
+    // then sort the filtered list
     sortedLessons() {
-      const sorted = [...this.lessons]; // copy so we don’t modify original array
+      const sorted = [...this.filteredLessons];
 
       sorted.sort((a, b) => {
         const field = this.sortBy;
         let aVal = a[field];
         let bVal = b[field];
 
-        // handle text fields (subject, location) -> compare in lowercase
         if (typeof aVal === 'string') aVal = aVal.toLowerCase();
         if (typeof bVal === 'string') bVal = bVal.toLowerCase();
 
@@ -307,7 +365,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   gap: 16px;
 }
 
@@ -348,6 +406,13 @@ export default {
   font-size: 13px;
   background: #f9fafb;
   outline: none;
+}
+
+/* filter row */
+.filter-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 14px;
 }
 
 .sort-direction {
@@ -533,6 +598,10 @@ export default {
   .lesson-list-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .filter-row {
+    flex-direction: column;
   }
 }
 </style>
