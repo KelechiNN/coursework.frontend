@@ -1,26 +1,64 @@
 <template>
-  <div class="lesson-list">
-    <h2>Extra Lessons</h2>
-    <ul>
-      <li v-for="lesson in lessons" :key="lesson.id" class="lesson-card">
-        <h3>
-          <i :class="lesson.icon" class="lesson-icon"></i>
-          {{ lesson.subject }}
-        </h3>
+  <section class="lesson-list">
+    <div class="lesson-list-header">
+      <div>
+        <h2>Available Lessons</h2>
+        <p>Choose from a range of after school subjects.</p>
+      </div>
+      <!-- later we’ll add sorting controls here -->
+    </div>
 
-        <p><strong>Location:</strong> {{ lesson.location }}</p>
-        <p><strong>Price:</strong> £{{ lesson.price }}</p>
-        <p><strong>Spaces Available:</strong> {{ lesson.spacesAvailable }}</p>
+    <div class="lessons-grid">
+      <article
+        v-for="lesson in lessons"
+        :key="lesson.id"
+        class="lesson-card"
+      >
+        <!-- Left: Icon -->
+        <div class="lesson-icon-wrap">
+          <i :class="lesson.icon"></i>
+        </div>
 
-        <button
-          :disabled="lesson.spacesAvailable === 0"
-          @click="addToCart(lesson)"
-        >
-          {{ lesson.spacesAvailable === 0 ? 'Full' : 'Add to Cart' }}
-        </button>
-      </li>
-    </ul>
-  </div>
+        <!-- Middle: Info -->
+        <div class="lesson-main">
+          <h3 class="lesson-title">{{ lesson.subject }}</h3>
+          <div class="lesson-tags">
+            <span class="tag tag-location">
+              <i class="fa-solid fa-location-dot"></i>
+              {{ lesson.location }}
+            </span>
+            <span class="tag tag-price">
+              £{{ lesson.price }}
+            </span>
+          </div>
+          <p class="lesson-description">
+            Great after school {{ lesson.subject.toLowerCase() }} support for students.
+          </p>
+        </div>
+
+        <!-- Right: Spaces + Button -->
+        <div class="lesson-side">
+          <div
+            class="spaces-pill"
+            :class="{ 'spaces-pill--full': lesson.spacesAvailable === 0 }"
+          >
+            <span v-if="lesson.spacesAvailable > 0">
+              {{ lesson.spacesAvailable }} spaces available
+            </span>
+            <span v-else>Fully booked</span>
+          </div>
+
+          <button
+            class="add-btn"
+            :disabled="lesson.spacesAvailable === 0"
+            @click="addToCart(lesson)"
+          >
+            {{ lesson.spacesAvailable === 0 ? 'Full' : 'Add to Cart' }}
+          </button>
+        </div>
+      </article>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -55,40 +93,180 @@ export default {
 
 <style scoped>
 .lesson-list {
-  max-width: 700px;
-  margin: 40px auto;
   background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 18px;
+  padding: 20px 22px 24px;
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(148, 163, 184, 0.12);
+}
+
+.lesson-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 18px;
+}
+
+.lesson-list-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.lesson-list-header p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Horizontal layout – cards */
+.lessons-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .lesson-card {
-  border-bottom: 1px solid #ddd;
-  padding: 15px 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
-.lesson-card:last-child {
-  border-bottom: none;
+.lesson-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(148, 163, 184, 0.4);
+  background: #ffffff;
 }
 
-button {
-  background-color: #42b983;
+.lesson-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: radial-gradient(circle at 20% 20%, #3b82f6, #10b981);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.lesson-icon-wrap i {
   color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 10px;
+  font-size: 24px;
 }
 
-button:disabled {
-  background-color: gray;
+.lesson-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.lesson-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.lesson-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid transparent;
+}
+
+.tag-location {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-color: #bfdbfe;
+}
+
+.tag-location i {
+  font-size: 11px;
+}
+
+.tag-price {
+  background: #ecfdf3;
+  color: #15803d;
+  border-color: #bbf7d0;
+}
+
+.lesson-description {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Right side: spaces and button */
+.lesson-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  min-width: 150px;
+}
+
+.spaces-pill {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #ecfdf3;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  white-space: nowrap;
+}
+
+.spaces-pill--full {
+  background: #fef2f2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+.add-btn {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #3b82f6, #10b981);
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.add-btn:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.add-btn:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
   cursor: not-allowed;
 }
 
-.lesson-icon {
-  color: #42b983;
-  margin-right: 10px;
+@media (max-width: 768px) {
+  .lesson-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .lesson-side {
+    align-items: flex-start;
+  }
 }
 </style>
