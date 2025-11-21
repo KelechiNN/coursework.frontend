@@ -169,15 +169,25 @@
 
     <!-- CART PAGE -->
     <div v-else class="cart-page">
-      <h3 class="cart-title">Your Cart</h3>
+      <div class="cart-header-row">
+        <h3 class="cart-title">Your Cart</h3>
+        <button
+          type="button"
+          class="clear-cart-btn"
+          :disabled="cartItemCount === 0"
+          @click="clearCart"
+        >
+          Clear cart
+        </button>
+      </div>
 
-      <!-- Empty cart -->
+      <!-- Empty cart message -->
       <p v-if="cartItemCount === 0" class="cart-empty">
-        Your cart is empty. Go back to the lessons page to add classes.
+        Your cart is empty. Add lessons to see them here.
       </p>
 
-      <!-- Cart with items -->
-      <div v-else>
+      <!-- Cart items + total -->
+      <div v-if="cartItemCount > 0">
         <ul class="cart-list">
           <li
             v-for="item in cart"
@@ -209,44 +219,44 @@
             Total: <strong>£{{ cartTotal }}</strong>
           </p>
         </div>
+      </div>
 
-        <!-- CHECKOUT -->
-        <div class="checkout-box">
-          <h4>Checkout details</h4>
+      <!-- CHECKOUT (always shows on cart page so message stays visible) -->
+      <div class="checkout-box">
+        <h4>Checkout details</h4>
 
-          <div class="checkout-field">
-            <label for="name">Name</label>
-            <input
-              id="name"
-              type="text"
-              v-model="customerName"
-              placeholder="Student or parent name"
-            />
-          </div>
-
-          <div class="checkout-field">
-            <label for="phone">Phone</label>
-            <input
-              id="phone"
-              type="text"
-              v-model="customerPhone"
-              placeholder="Contact number"
-              @input="onPhoneInput"
-            />
-          </div>
-
-          <button
-            class="checkout-btn"
-            :disabled="!isCheckoutValid"
-            @click="checkout"
-          >
-            Checkout
-          </button>
-
-          <p v-if="checkoutMessage" class="checkout-message">
-            {{ checkoutMessage }}
-          </p>
+        <div class="checkout-field">
+          <label for="name">Name</label>
+          <input
+            id="name"
+            type="text"
+            v-model="customerName"
+            placeholder="Student or parent name"
+          />
         </div>
+
+        <div class="checkout-field">
+          <label for="phone">Phone</label>
+          <input
+            id="phone"
+            type="text"
+            v-model="customerPhone"
+            placeholder="Contact number"
+            @input="onPhoneInput"
+          />
+        </div>
+
+        <button
+          class="checkout-btn"
+          :disabled="!isCheckoutValid"
+          @click="checkout"
+        >
+          Checkout
+        </button>
+
+        <p v-if="checkoutMessage" class="checkout-message">
+          {{ checkoutMessage }}
+        </p>
       </div>
     </div>
   </section>
@@ -514,6 +524,10 @@ export default {
   methods: {
     toggleCart() {
       this.showCart = !this.showCart;
+      // when leaving cart, clear any old checkout message
+      if (!this.showCart) {
+        this.checkoutMessage = '';
+      }
     },
 
     onPhoneInput() {
@@ -555,19 +569,32 @@ export default {
       }
     },
 
+    // Clear cart button
+    clearCart() {
+      // return spaces to lessons
+      this.cart.forEach(item => {
+        const lesson = this.lessons.find(l => l.id === item.id);
+        if (lesson) {
+          lesson.spacesAvailable += item.quantity;
+        }
+      });
+      this.cart = [];
+      this.checkoutMessage = '';
+    },
+
     checkout() {
       if (!this.isCheckoutValid) return;
 
       const name = this.customerName.trim();
       this.checkoutMessage = `Thank you, ${name}! Your order has been submitted.`;
 
-      // clear cart and form (spaces stay reduced)
+      // clear cart and form (spaces stay reduced – order is confirmed)
       this.cart = [];
       this.customerName = '';
       this.customerPhone = '';
 
-      // go back to lessons page
-      this.showCart = false;
+      // stay on cart page; message remains until user leaves the cart
+      // (toggleCart will clear checkoutMessage when leaving)
     }
   }
 };
@@ -867,19 +894,53 @@ export default {
 
 /* CART PAGE */
 .cart-page {
-  margin-top: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* header row in cart */
+.cart-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .cart-title {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 750;
   color: #111827;
+}
+
+.clear-cart-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.clear-cart-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.clear-cart-btn:hover:not(:disabled) {
+  background: #fee2e2;
+  box-shadow: 0 6px 16px rgba(248, 113, 113, 0.4);
+  transform: translateY(-1px);
 }
 
 .cart-empty {
   font-size: 14px;
   color: #6b7280;
+  margin-bottom: 10px;
 }
 
 .cart-list {
@@ -949,11 +1010,12 @@ export default {
   color: #111827;
 }
 
+/* checkout box */
 .checkout-box {
   margin-top: 8px;
   padding: 12px 14px;
   border-radius: 14px;
-  background: #f9fafb;
+  background: #f3f4ff;
   border: 1px solid #e5e7eb;
 }
 
